@@ -9,7 +9,7 @@ provider:
 
 functions:
   ipa_to_audio:
-    handler: handler.ip_to_audio
+    handler: handler.ipa_to_audio
     events:
       - httpApi:
           path: /
