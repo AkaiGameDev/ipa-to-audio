@@ -8,9 +8,9 @@ provider:
   runtime: python3.9
 
 functions:
-  hello:
-    handler: handler.hello
+  ipa_to_audio:
+    handler: handler.ip_to_audio
     events:
       - httpApi:
           path: /
-          method: get
+          method: post

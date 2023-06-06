@@ -2,7 +2,7 @@ import json
 import boto3
 import os
 
-def lambda_handler(event, context):
+def ipa_to_audio(event, context):
     input = event['ipa']
     response = client.synthesize_speech(Engine='standard',
         LanguageCode='en-US',
