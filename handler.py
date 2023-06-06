@@ -1,5 +1,16 @@
 import json
+import boto3
+import os
 
+def lambda_handler(event, context):
+    input = event['ipa']
+    response = client.synthesize_speech(Engine='standard',
+        LanguageCode='en-US',
+        OutputFormat=event['contentType'],
+        Text="<phoneme alphabet='ipa' ph='/" + input + "/'></phoneme>",
+        TextType='ssml',
+        VoiceId='Joey')
+    return response
 
 def hello(event, context):
     body = {
@@ -10,3 +21,4 @@ def hello(event, context):
     response = {"statusCode": 200, "body": json.dumps(body)}
 
     return response
+
