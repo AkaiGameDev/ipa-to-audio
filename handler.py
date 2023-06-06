@@ -3,6 +3,7 @@ import boto3
 import os
 
 def ipa_to_audio(event, context):
+    client = boto3.client('polly')
     input = event['ipa']
     response = client.synthesize_speech(Engine='standard',
         LanguageCode='en-US',
