@@ -83,10 +83,10 @@
               }
             }
           },
-          "HelloLogGroup": {
+          "IpaUnderscoretoUnderscoreaudioLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/ipa-to-audio-dev-hello"
+              "LogGroupName": "/aws/lambda/ipa-to-audio-dev-ipa_to_audio"
             }
           },
           "IamRoleLambdaExecution": {
@@ -201,7 +201,7 @@
                         "Resource": [
                           {
                             "Fn::GetAtt": [
-                              "HelloLogGroup",
+                              "IpaUnderscoretoUnderscoreaudioLogGroup",
                               "Arn"
                             ]
                           }
@@ -213,18 +213,18 @@
               ]
             }
           },
-          "HelloLambdaFunction": {
+          "IpaUnderscoretoUnderscoreaudioLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ipa-to-audio/dev/1686072715384-2023-06-06T17:31:55.384Z/ipa-to-audio.zip"
+                "S3Key": "serverless/ipa-to-audio/dev/1686080740970-2023-06-06T19:45:40.970Z/ipa-to-audio.zip"
               },
-              "Handler": "s_hello.handler",
+              "Handler": "s_ipa_to_audio.handler",
               "Runtime": "python3.9",
-              "FunctionName": "ipa-to-audio-dev-hello",
+              "FunctionName": "ipa-to-audio-dev-ipa_to_audio",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -235,17 +235,17 @@
               }
             },
             "DependsOn": [
-              "HelloLogGroup"
+              "IpaUnderscoretoUnderscoreaudioLogGroup"
             ]
           },
-          "HelloLambdaVersion62FJFoav2K3BtAQ4859Z13oOmRqbMmbMWKsLnSSm8E": {
+          "IpaUnderscoretoUnderscoreaudioLambdaVersionKoI46H5Ow6yxkAOHou6DFuKoWeeRwjZIJU3Qi1BGG8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "HelloLambdaFunction"
+                "Ref": "IpaUnderscoretoUnderscoreaudioLambdaFunction"
               },
-              "CodeSha256": "yCp4UWpp41CeumYqYMP6KvkCYeN8YLPOFFF+0QO6f+Q="
+              "CodeSha256": "suilUrmnJ+zP/J6TfYMbP8fxP4mI3zjtqBzZgIM9138="
             }
           },
           "HttpApi": {
@@ -284,12 +284,12 @@
             },
             "DependsOn": "HttpApiLogGroup"
           },
-          "HelloLambdaPermissionHttpApi": {
+          "IpaUnderscoretoUnderscoreaudioLambdaPermissionHttpApi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "HelloLambdaFunction",
+                  "IpaUnderscoretoUnderscoreaudioLambdaFunction",
                   "Arn"
                 ]
               },
@@ -321,7 +321,7 @@
               }
             }
           },
-          "HttpApiIntegrationHello": {
+          "HttpApiIntegrationIpaUnderscoretoUnderscoreaudio": {
             "Type": "AWS::ApiGatewayV2::Integration",
             "Properties": {
               "ApiId": {
@@ -329,40 +329,40 @@
               },
               "IntegrationType": "AWS_PROXY",
               "IntegrationUri": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"HelloLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"IpaUnderscoretoUnderscoreaudioLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
               },
               "PayloadFormatVersion": "2.0",
               "TimeoutInMillis": 30000
             }
           },
-          "HttpApiRouteGet": {
+          "HttpApiRoutePost": {
             "Type": "AWS::ApiGatewayV2::Route",
             "Properties": {
               "ApiId": {
                 "Ref": "HttpApi"
               },
-              "RouteKey": "GET /",
+              "RouteKey": "POST /",
               "Target": {
                 "Fn::Join": [
                   "/",
                   [
                     "integrations",
                     {
-                      "Ref": "HttpApiIntegrationHello"
+                      "Ref": "HttpApiIntegrationIpaUnderscoretoUnderscoreaudio"
                     }
                   ]
                 ]
               }
             },
-            "DependsOn": "HttpApiIntegrationHello"
+            "DependsOn": "HttpApiIntegrationIpaUnderscoretoUnderscoreaudio"
           },
-          "CWLSubFilterHelloLogGroupUsEast1": {
+          "CWLSubFilterIpaUnderscoretoUnderscoreaudioLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
               "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:6d89adf7-6e3f-4721-88b5-0fe84b037364#stTgszBrZsV66q6h3Y#ipa-to-audio#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "HelloLogGroup"
+                "Ref": "IpaUnderscoretoUnderscoreaudioLogGroup"
               }
             }
           },
@@ -397,13 +397,13 @@
               "Name": "sls-ipa-to-audio-dev-EnterpriseLogAccessIamRole"
             }
           },
-          "HelloLambdaFunctionQualifiedArn": {
+          "IpaUnderscoretoUnderscoreaudioLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersion62FJFoav2K3BtAQ4859Z13oOmRqbMmbMWKsLnSSm8E"
+              "Ref": "IpaUnderscoretoUnderscoreaudioLambdaVersionKoI46H5Ow6yxkAOHou6DFuKoWeeRwjZIJU3Qi1BGG8"
             },
             "Export": {
-              "Name": "sls-ipa-to-audio-dev-HelloLambdaFunctionQualifiedArn"
+              "Name": "sls-ipa-to-audio-dev-IpaUnderscoretoUnderscoreaudioLambdaFunctionQualifiedArn"
             }
           },
           "HttpApiId": {
@@ -533,30 +533,32 @@
     },
     "pluginsData": {},
     "functions": {
-      "hello": {
-        "handler": "s_hello.handler",
+      "ipa_to_audio": {
+        "handler": "s_ipa_to_audio.handler",
         "events": [
           {
             "httpApi": {
               "path": "/",
-              "method": "get"
+              "method": "post"
             },
-            "resolvedMethod": "GET",
+            "resolvedMethod": "POST",
             "resolvedPath": "/"
           }
         ],
-        "name": "ipa-to-audio-dev-hello",
+        "name": "ipa-to-audio-dev-ipa_to_audio",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersion62FJFoav2K3BtAQ4859Z13oOmRqbMmbMWKsLnSSm8E"
+        "versionLogicalId": "IpaUnderscoretoUnderscoreaudioLambdaVersionKoI46H5Ow6yxkAOHou6DFuKoWeeRwjZIJU3Qi1BGG8"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
+      "org": "akaigamedev",
+      "app": "ipa-to-audio",
       "service": "ipa-to-audio",
       "frameworkVersion": "3",
       "provider": {
@@ -564,9 +566,7 @@
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
-      },
-      "org": "akaigamedev",
-      "app": "ipa-to-audio"
+      }
     },
     "app": "ipa-to-audio",
     "org": "akaigamedev",
@@ -575,10 +575,10 @@
     "isDashboardAppPreconfigured": true,
     "orgUid": "6d89adf7-6e3f-4721-88b5-0fe84b037364",
     "appUid": "stTgszBrZsV66q6h3Y",
-    "artifact": "C:\\Users\\aaron\\ipa-to-audio\\.serverless\\ipa-to-audio.zip"
+    "artifact": "C:\\Users\\aaron\\OneDrive\\Desktop\\School\\2023 Summer\\Serverless\\ipa-to-audio\\.serverless\\ipa-to-audio.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/ipa-to-audio/dev/1686072715384-2023-06-06T17:31:55.384Z",
+    "artifactDirectoryName": "serverless/ipa-to-audio/dev/1686080740970-2023-06-06T19:45:40.970Z",
     "artifact": "ipa-to-audio.zip"
   }
 }

@@ -4,11 +4,13 @@ import os
 
 def ipa_to_audio(event, context):
     client = boto3.client('polly')
-    input = event['ipa']
+    body = json.loads(event['body'])
+    ipa = body['ipa']
     response = client.synthesize_speech(Engine='standard',
         LanguageCode='en-US',
-        OutputFormat=event['contentType'],
-        Text="<phoneme alphabet='ipa' ph='/" + input + "/'></phoneme>",
+        OutputFormat=body['contentType'],
+        Text="<phoneme alphabet='ipa' ph='/" + ipa + "/'></phoneme>",
         TextType='ssml',
         VoiceId='Joey')
-    return response
+    data = response['AudioStream'].read()
+    return data
